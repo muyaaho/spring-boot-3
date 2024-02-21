@@ -13,4 +13,11 @@ public class FirstController {
         // templates 디렉토리에 작성한 mustache 페이지 파일 이름을 리턴하면 greetings.mustache 파일을 반환한다
         return "greetings";
     }
+
+    @GetMapping("/bye")
+    public String seeYouNext(Model model) {
+        model.addAttribute("nickname", "지희");
+        return "goodbye";
+    }
+
 }
