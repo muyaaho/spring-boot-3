@@ -32,6 +32,11 @@ public class ArticleController {
     @Autowired
     private ArticleRepository articleRepository;
 
+    @GetMapping("/articles/new")
+    public String newArticlesForm() {
+        return "articles/new";
+    }
+
     @GetMapping("/articles/{id}")
     public String show(@PathVariable Long id, Model model) {
         log.info("id = " + id);
@@ -40,8 +45,9 @@ public class ArticleController {
 
         // 2. 모델에 데이터 등록하기
         model.addAttribute("article", articleEntity);
+
         // 3. 뷰 페이지 반환하기
-        return "";
+        return "articles/show";
     }
 
 }
