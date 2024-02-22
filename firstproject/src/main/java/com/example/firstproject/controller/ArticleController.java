@@ -43,7 +43,7 @@ public class ArticleController {
     public String show(@PathVariable Long id, Model model) {
         log.info("id = " + id);
         // 1. id를 조회해 데이터 가져오기
-        Optional<Article> articleEntity = Optional.ofNullable(articleRepository.findById(id).orElse(null));
+        Article articleEntity = articleRepository.findById(id).orElse(null);
 
         log.info("id: 데이터가 가져와지는가 -> " + articleEntity.toString());
 
