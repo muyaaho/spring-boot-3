@@ -33,7 +33,7 @@ public class MemeberController {
         log.info(member.toString());
         Member saved = memberRepository.save(member);
         log.info(saved.toString());
-        return "";
+        return "redirect:/members/" + saved.getId();
     }
 
     @GetMapping("/members/{id}")
@@ -46,7 +46,6 @@ public class MemeberController {
         model.addAttribute("member", memberEntity);
         log.info(model.toString());
 
-        // TODO: members/show
         return "members/show";
     }
 
@@ -55,7 +54,6 @@ public class MemeberController {
         List<Member> memberEntityList = memberRepository.findAll();
         model.addAttribute("memberList", memberEntityList);
 
-        // TODO: members/index
         return "members/index";
     }
 }
