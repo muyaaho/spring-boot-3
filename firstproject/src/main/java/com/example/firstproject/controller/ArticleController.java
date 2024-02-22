@@ -17,18 +17,6 @@ import java.util.Optional;
 @Controller
 public class ArticleController {
 
-    @PostMapping("articles/create")
-    public String createArticle(ArticleForm form) {
-        log.info(form.toString());
-        // 1. DTO를 엔티티로 변환
-        Article article = form.toEntity();
-        log.info(article.toString());
-        // 2. 리파지터리로 엔티티를 DB에 저장
-        Article saved = articleRepository.save(article);
-        log.info(saved.toString());
-        return "";
-    }
-
     @Autowired
     private ArticleRepository articleRepository;
 
@@ -37,14 +25,31 @@ public class ArticleController {
         return "articles/new";
     }
 
+    @PostMapping("articles/create")
+    public String createArticle(ArticleForm form) {
+        log.info(form.toString());  // ArticleForm
+
+        // 1. DTO를 엔티티로 변환
+        Article article = form.toEntity();
+        log.info(article.toString());   // Article
+
+        // 2. 리파지터리로 엔티티를 DB에 저장
+        Article saved = articleRepository.save(article);
+        log.info(saved.toString());     // Article
+        return "";
+    }
+
     @GetMapping("/articles/{id}")
     public String show(@PathVariable Long id, Model model) {
         log.info("id = " + id);
         // 1. id를 조회해 데이터 가져오기
         Optional<Article> articleEntity = Optional.ofNullable(articleRepository.findById(id).orElse(null));
 
+        log.info("id: 데이터가 가져와지는가 -> " + articleEntity.toString());
+
         // 2. 모델에 데이터 등록하기
         model.addAttribute("article", articleEntity);
+        log.info("model에 데이터가 등록되는가 -> " + model.toString());
 
         // 3. 뷰 페이지 반환하기
         return "articles/show";

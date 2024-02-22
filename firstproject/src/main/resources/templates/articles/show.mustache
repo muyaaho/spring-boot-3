@@ -5,6 +5,7 @@
         <th scope="col">Id</th>
         <th scope="col">Title</th>
         <th scope="col">Content</th>
+        <th scope="col">전체내용 출력</th>
     </tr>
     </thead>
     <tbody>
@@ -14,8 +15,10 @@
             <th>{{id}}</th>
             <td>{{title}}</td>
             <td>{{content}}</td>
+            <td>{{.}}</td>
         </tr>
     {{/article}}
+    {{^article}}입력되지 않음{{/article}}
     </tbody>
 </table>
 {{>layouts/footer}}
