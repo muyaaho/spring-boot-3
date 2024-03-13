@@ -23,7 +23,7 @@ public class ArticleController {
 
     @PostMapping("/articles/create")
     public String createArticle(ArticleForm form) {
-        System.out.println(form.toString());
+        log.info(form.toString());
         // 1. DTO를 엔티티로 변환
         Article article = form.toEntity();
         log.info(form.toString());
