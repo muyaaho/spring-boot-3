@@ -10,4 +10,12 @@ import org.springframework.stereotype.Service;
 public class ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
+
+    public List<Article> index() {
+        return articleRepository.findAll();
+    }
+
+    public Article show(Long id) {
+        return articleRepository.findById(id).orElse(null);
+    }
 }
