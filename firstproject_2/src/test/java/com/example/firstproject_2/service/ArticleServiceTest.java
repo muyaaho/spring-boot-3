@@ -80,4 +80,73 @@ class ArticleServiceTest {
         assertEquals(expected, article);
     }
 
+    @Test
+    @Transactional
+    void update_성공_존재하는_id와_title_content가_있는_dto_입력() {
+        // 예상 데이터
+        Long id = 1L;
+        String title = "가가가";
+        String content = "존재하는 id, title, content가 모두 존재";
+        ArticleForm dto = new ArticleForm(id, title, content);
+        Article expected = new Article(1L, title, content);
+        // 실제 데이터
+        Article article = articleService.update(id, dto);
+        // 비교 및 검증
+        assertEquals(expected.toString(), article.toString());
+    }
+
+    @Test
+    @Transactional
+    void update_성공_존재하는_id와_title만_있는_dto_입력() {
+        // 예상 데이터
+        Long id = 1L;
+        String title = "가가가";
+        String content = "111";
+        ArticleForm dto = new ArticleForm(id, title, null);
+        Article expected = new Article(id, title, content);
+        // 실제 데이터
+        Article article = articleService.update(id, dto);
+        // 비교 및 검증
+        assertEquals(expected.toString(), article.toString());
+    }
+
+    @Test
+    @Transactional
+    void update_실패_존재하지_않는_id의_dto_입력() {
+        // 예상 데이터
+        Long id = 100L;
+        String title = "가가가";
+        String content = "과연 통과할 것인가";
+        ArticleForm dto = new ArticleForm(id, title, content);
+        Article expected = null;
+        // 실제 데이터
+        Article article = articleService.update(id, dto);
+        // 비교 및 검증
+        assertEquals(expected, article);
+
+    }
+
+    @Test
+    @Transactional
+    void deleted_성공_존재하는_id_입력() {
+        // 예상 데이터
+        Long id = 1L;
+        Article expected = new Article(1L, "aaa", "111");
+        // 실제 데이터
+        Article article = articleService.deleted(id);
+        // 비교 및 검증
+        assertEquals(expected.toString(), article.toString());
+    }
+
+    @Test
+    @Transactional
+    void deleted_실패_존재하지_않는_id_입력() {
+        // 예상 데이터
+        Long id = 100L;
+        Article expected = null;
+        // 실제 데이터
+        Article article = articleService.deleted(id);
+        // 비교 및 검증
+        assertEquals(expected, article);
+    }
 }
