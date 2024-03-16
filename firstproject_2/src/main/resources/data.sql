@@ -3,7 +3,7 @@ INSERT INTO article(title, content) VALUES('bbb', '222');
 INSERT INTO article(title, content) VALUES('ccc', '333');
 INSERT INTO article(title, content) VALUES('당신의 인생 영화는?', '댓글로 입력해주세요');
 INSERT INTO article(title, content) VALUES('당신의 소울 푸드는?', '댓글로 입력해주세요');
-INSERT INTO article(title, content) VALUES('당신의 취미는?', '댓그롤 입력해주세요');
+INSERT INTO article(title, content) VALUES('당신의 취미는?', '댓글로 입력해주세요');
 
 INSERT INTO comment(article_id, nickname, body) VALUES(4, 'Park', '굿 윌 헌팅');
 INSERT INTO comment(article_id, nickname, body) VALUES(4, 'Kim', '아이 엠 샘');
