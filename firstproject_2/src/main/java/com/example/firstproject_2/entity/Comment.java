@@ -22,7 +22,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name="article")
+    @JoinColumn(name="article_id")
     private Article article;
     @Column
     private String nickname;
