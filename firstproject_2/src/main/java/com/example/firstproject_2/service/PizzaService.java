@@ -3,6 +3,7 @@ package com.example.firstproject_2.service;
 import com.example.firstproject_2.dto.PizzaDTO;
 import com.example.firstproject_2.entity.Pizza;
 import com.example.firstproject_2.repository.PizzaRepository;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,13 @@ public class PizzaService {
         target.patch(pizza);
         Pizza updated = pizzaRepository.save(target);
         return updated;
+    }
+
+    @Transactional
+    public PizzaDTO delete(Long id) {
+        Pizza target = pizzaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("삭제 실패. 대상이 없습니다."));
+        pizzaRepository.delete(target);
+        return PizzaDTO.createPizzaDTO(target);
     }
 }

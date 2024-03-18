@@ -15,6 +15,14 @@ public class PizzaDTO {
     private String name;
     private String price;
 
+    public static PizzaDTO createPizzaDTO(Pizza pizza) {
+        return new PizzaDTO(
+                pizza.getId(),
+                pizza.getName(),
+                pizza.getPrice()
+        );
+    }
+
     public Pizza toEntity() {
         return new Pizza(id, name, price);
     }
