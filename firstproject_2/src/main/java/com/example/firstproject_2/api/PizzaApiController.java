@@ -33,10 +33,9 @@ public class PizzaApiController {
     }
 
     @PostMapping("/api/pizza")
-    public ResponseEntity<Pizza> create(@RequestBody PizzaDTO dto) {
-        Pizza created = pizzaService.create(dto);
-        return (created != null) ? ResponseEntity.status(HttpStatus.OK).body(created)
-                : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    public ResponseEntity<PizzaDTO> create(@RequestBody PizzaDTO dto) {
+        PizzaDTO createdDTO = pizzaService.create(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(createdDTO);
     }
 
     @PatchMapping("/api/pizza/{id}")

@@ -26,6 +26,20 @@ public class Pizza {
     @Column
     private String price;
 
+    public static Pizza createPizza(PizzaDTO dto) {
+        if (dto.getName() != null) {
+            throw new IllegalArgumentException("생성 실패! 이름이 입력되지 않았습니다.");
+        }
+        if (dto.getPrice() != null) {
+            throw new IllegalArgumentException("생성 실패! 가격이 입력되지 않았습니다.");
+        }
+        return new Pizza(
+                dto.getId(),
+                dto.getName(),
+                dto.getPrice()
+        );
+    }
+
     public void patch(PizzaDTO dto) {
         if (this.id != dto.getId()) {
             throw new IllegalArgumentException("수정 실패! 잘못된 id가 입력되었습니다.");

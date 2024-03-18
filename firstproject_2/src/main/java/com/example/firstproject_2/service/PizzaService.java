@@ -23,12 +23,10 @@ public class PizzaService {
         return pizzaRepository.findById(id).orElse(null);
     }
 
-    public Pizza create(PizzaDTO dto) {
-        Pizza pizza = dto.toEntity();
-        if (pizza.getId() != null) {
-            return null;
-        }
-        return pizzaRepository.save(pizza);
+    public PizzaDTO create(PizzaDTO dto) {
+        Pizza pizza = Pizza.createPizza(dto);
+        Pizza created = pizzaRepository.save(pizza);
+        return PizzaDTO.createPizzaDTO(created);
     }
 
     public PizzaDTO update(Long id, PizzaDTO dto) {
