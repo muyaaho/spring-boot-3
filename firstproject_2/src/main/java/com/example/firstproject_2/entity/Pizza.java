@@ -1,5 +1,6 @@
 package com.example.firstproject_2.entity;
 
+import com.example.firstproject_2.dto.PizzaDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,12 +26,16 @@ public class Pizza {
     @Column
     private String price;
 
-    public void patch(Pizza pizza) {
-        if (pizza.name != null) {
-            this.name = pizza.name;
+    public void patch(PizzaDTO dto) {
+        if (this.id != dto.getId()) {
+            throw new IllegalArgumentException("수정 실패! 잘못된 id가 입력되었습니다.");
         }
-        if (pizza.price != null) {
-            this.price = pizza.price;
+
+        if (dto.getName() != null) {
+            this.name = dto.getName();
+        }
+        if (dto.getPrice() != null) {
+            this.price = dto.getPrice();
         }
     }
 }

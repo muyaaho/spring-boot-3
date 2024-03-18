@@ -40,11 +40,9 @@ public class PizzaApiController {
     }
 
     @PatchMapping("/api/pizza/{id}")
-    public ResponseEntity<Pizza> update(@PathVariable Long id, @RequestBody PizzaDTO dto) {
-        Pizza updated = pizzaService.update(id, dto);
-        return (updated != null) ?
-                ResponseEntity.status(HttpStatus.OK).body(updated) :
-                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    public ResponseEntity<PizzaDTO> update(@PathVariable Long id, @RequestBody PizzaDTO dto) {
+        PizzaDTO updatedDTO = pizzaService.update(id, dto);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedDTO);
     }
 
     @DeleteMapping("/api/pizza/{id}")

@@ -31,18 +31,12 @@ public class PizzaService {
         return pizzaRepository.save(pizza);
     }
 
-    public Pizza update(Long id, PizzaDTO dto) {
-        Pizza pizza = dto.toEntity();
-        log.info("id: {}, pizza: {}", id, pizza.toString());
-        Pizza target = pizzaRepository.findById(id).orElse(null);
-        log.info("target: {}", target.toString());
-        if (target == null || !id.equals(pizza.getId())) {
-            log.info("잘못된 요청, id: {}, pizza: {}", id, pizza.toString());
-            return null;
-        }
-        target.patch(pizza);
+    public PizzaDTO update(Long id, PizzaDTO dto) {
+        Pizza target = pizzaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("수정 실패! 대상이 없습니다."));
+        target.patch(dto);
         Pizza updated = pizzaRepository.save(target);
-        return updated;
+        return PizzaDTO.createPizzaDTO(updated);
     }
 
     @Transactional
