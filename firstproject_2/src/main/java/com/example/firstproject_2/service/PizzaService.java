@@ -29,4 +29,18 @@ public class PizzaService {
         }
         return pizzaRepository.save(pizza);
     }
+
+    public Pizza update(Long id, PizzaDTO dto) {
+        Pizza pizza = dto.toEntity();
+        log.info("id: {}, pizza: {}", id, pizza.toString());
+        Pizza target = pizzaRepository.findById(id).orElse(null);
+        log.info("target: {}", target.toString());
+        if (target == null || !id.equals(pizza.getId())) {
+            log.info("잘못된 요청, id: {}, pizza: {}", id, pizza.toString());
+            return null;
+        }
+        target.patch(pizza);
+        Pizza updated = pizzaRepository.save(target);
+        return updated;
+    }
 }
