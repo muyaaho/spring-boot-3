@@ -1,7 +1,6 @@
 package com.example.firstproject_2.api;
 
 import com.example.firstproject_2.dto.PizzaDTO;
-import com.example.firstproject_2.entity.Pizza;
 import com.example.firstproject_2.service.PizzaService;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -23,13 +22,15 @@ public class PizzaApiController {
     private PizzaService pizzaService;
 
     @GetMapping("/api/pizza")
-    public List<Pizza> index() {
-        return pizzaService.index();
+    public ResponseEntity<List<PizzaDTO>> index() {
+        List<PizzaDTO> dtos = pizzaService.index();
+        return ResponseEntity.status(HttpStatus.OK).body(dtos);
     }
 
     @GetMapping("/api/pizza/{id}")
-    public Pizza show(@PathVariable Long id) {
-        return pizzaService.show(id);
+    public ResponseEntity<PizzaDTO> show(@PathVariable Long id) {
+        PizzaDTO dto = pizzaService.show(id);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
     @PostMapping("/api/pizza")

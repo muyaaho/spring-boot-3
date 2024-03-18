@@ -5,6 +5,7 @@ import com.example.firstproject_2.entity.Pizza;
 import com.example.firstproject_2.repository.PizzaRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,17 @@ public class PizzaService {
     @Autowired
     private PizzaRepository pizzaRepository;
 
-    public List<Pizza> index() {
-        return pizzaRepository.findAll();
+    public List<PizzaDTO> index() {
+        return pizzaRepository.findAll()
+                .stream()
+                .map(PizzaDTO::createPizzaDTO)
+                .collect(Collectors.toList());
     }
 
-    public Pizza show(Long id) {
-        return pizzaRepository.findById(id).orElse(null);
+    public PizzaDTO show(Long id) {
+        Pizza pizza = pizzaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("조회 실패! 해당 id에 대한 대상이 없습니다."));
+        return PizzaDTO.createPizzaDTO(pizza);
     }
 
     public PizzaDTO create(PizzaDTO dto) {
