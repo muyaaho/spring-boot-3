@@ -43,17 +43,17 @@
     btnModal.addEventListener("show.bs.modal", function(event) {
         // 1. 트리거 버트 선택
         const triggerBtn = event.relatedTarget;
-        // 2. 데이터 가져오기
+        // 2. 변경 대상 가져오기
+        const modalTitle = document.querySelector("#modal-title");
+        const modalText = document.querySelector("#modal-text");
+        // 3. 전달값 가져오기
         const title = triggerBtn.getAttribute("data-custom-title");
         const text = triggerBtn.getAttribute("data-custom-text");
-        // 3. 폼에 데이터 반영
-        document.querySelector("#modal-title").value=title;
-        document.querySelector("#modal-body").value=text;
-    });
+        // 4. 값 변경
+        modalTitle.innerText = title;
+        modalText.innerText = text;
+        });
     }
-    {
-    }
-
 </script>
 </body>
 </html>
