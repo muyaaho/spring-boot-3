@@ -16,12 +16,10 @@
 </ul>
 <script>
     // 이미 수강한 과목은 취소선 처리
-    const cancel = document.querySelector(".prerequisite");
+    const cancel = document.querySelectorAll(".prerequisite");
     // 이벤트 처리
-    cancel.addEventListener("load", () => {
-        const liElement = document.querySelector("li");
-        liElement.style.textDecoration = "line-through";
-        window.location.reload();
+    cancel.forEach((item) => {
+        item.style.textDecoration = "line-through";
     });
 </script>
 </body>
